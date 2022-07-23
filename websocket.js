@@ -9,7 +9,7 @@ const httpServer = http.createServer((request, response) => {
 
 let connection = null;
 
-httpServer.listen(8080, () =>     console.log((new Date()) + ' Server is listening on port 8080'))
+httpServer.listen(8080, () => console.log((new Date()) + ' Server is listening on port 8080'))
 
 const wsServer = new WebSocketServer({
     httpServer: httpServer,
