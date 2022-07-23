@@ -7,10 +7,12 @@
 
 ##### Implementation
 From browser open an webscoket connection
-let ws = new WebSocket("ws://localhost:8080", 'echo-protocol')
+
+    let ws = new WebSocket("ws://localhost:8080", 'echo-protocol')
 
 Add an event listener which prints if any message is received
 
-ws.addEventListener('message', function (event) {
-    console.log('Message from server ', event.data);
-});
+    ws.addEventListener('message', function (event) {
+        console.log('Message from server ', event.data);
+    });
+    ws.onclose = function(event) {console.log(event);};
