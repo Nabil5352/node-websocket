@@ -6,19 +6,20 @@
 3. NPM package for websocket: [WebScoket](https://www.npmjs.com/package/websocket)
 4. NPM package for ws [**Recommended**]: [WS](https://www.npmjs.com/package/ws)
 
-
-##### Server Implementation
-1. First create a folder `cert` and insider the folder generate certificate and key file for secure https server. [Node Tutorial](https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/)
-2. Run any implementation using following command. HTTPS only enabled for `ws` implementation.
-
-    node ws
-
 ##### Find WAN IP
 Find WAN IPN using following command (Ubuntu)
 
     ip addr show
 
 This will show an IP like 192.*.*.* 
+
+
+##### Server Implementation
+1. First create a folder `cert` and insider the folder generate certificate and key file for secure https server. [Node Tutorial](https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/)
+2. As this is a self-signed certificate, some browser may not support the connection. For that, first load `https://<Your-Wan-IP>:8080` in browser and accept the certificate.
+3. Run any implementation using following command. HTTPS only enabled for `ws` implementation.
+
+    node ws
 
 ##### Client Implementation
 Open `Client.html` in browser or
