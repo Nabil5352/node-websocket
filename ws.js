@@ -1,18 +1,22 @@
-const http = require("http");
+const fs = require('fs');
+const https = require("https");
 const WebSocketServer = require('ws').Server;
 
-const httpServer = http.createServer((request, response) => {
+var options = {
+    key: fs.readFileSync('cert/key.pem'),
+    cert: fs.readFileSync('cert/cert.pem')
+};  
+
+const httpsServer = https.createServer(options, (request, response) => {
     console.log((new Date()) + ' Received request for ' + request.url);
     response.writeHead(404);
     response.end();
-})
+}).listen(8080, () => console.log((new Date()) + ' Server is listening on port 8080'))
 
 let connection = null;
 
-httpServer.listen(8080, () => console.log((new Date()) + ' Server is listening on port 8080'))
-
-const wsServer = new WebSocketServer({
-    server:httpServer
+const wssServer = new WebSocketServer({
+    server: httpsServer
 });
 
 function originIsAllowed(origin) {
@@ -20,7 +24,7 @@ function originIsAllowed(origin) {
     return true;
 }
 
-wsServer.on('connection', function(ws) {
+wssServer.on('connection', function(ws) {
     // if (!originIsAllowed(request.origin)) {
     //   // Make sure we only accept requests from an allowed origin
     //   request.reject();
@@ -35,7 +39,7 @@ wsServer.on('connection', function(ws) {
         console.log('received: %s', message);
     });
 
-    ws.send("You said: something");
+    ws.send("Hello world!");
     // connection.on('close', function(reasonCode, description) {
     //     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     // });
