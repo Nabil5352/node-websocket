@@ -7,7 +7,7 @@
         Websocket test.
     </body>
     <script>
-        const socket = new WebSocket('wss://192.168.31.60:8080');
+        const socket = new WebSocket('wss://<Your-Wan-IP>:8080');
         console.log(socket);
         socket.addEventListener('message', function (event) {
             console.log('Message from server ', event.data);
